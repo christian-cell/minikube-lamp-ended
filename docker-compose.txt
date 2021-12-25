@@ -1,0 +1,52 @@
+version: "3"
+services:
+  server:
+    container_name: server
+    image: christianphp/my-php:1.0
+    ports:
+      - 8080:80
+    restart: 'always'
+    links: 
+      - "db"
+    volumes:
+      - ./website:/var/www/html/
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    #command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - '8087:80'
+    environment:
+      #- PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_PASSWORD=secret
+      #PMA_HOST: db
+      #PMA_PORT: 5506
+      #PMA_PASSWORD: 12345678
+      #PMA_USER: christian
+      #PMA_ROOT_PASSWORD: 12345678
+      #MYSQL_USER: christian
+      #MYSQL_PASSWORD: 12345678
+      #MYSQL_ROOT_PASSWORD: 12345678
+      #to grant permissions ALTER USER root IDENTIFIED WITH mysql_native_password BY '12345678'; inside the
+
+      # logear con root y 12345678
+    depends_on:
+      - db
+    links:
+      - "db"
+  db:
+    container_name: db
+    image: mysql:latest
+    ports: 
+      - '5506:3306'
+    restart: unless-stopped
+    environment:
+      MYSQL_USER: christian
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    volumes: 
+      - dump:/var/lib/mysql
+volumes:
+  dump:
