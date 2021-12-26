@@ -4,7 +4,7 @@ To share and run this php-apache backend application environment made in docker 
 
 RUN
 
-$ git clone https://github.com/christian-cell/Docker-and-kubernetes-php-apache-environment.git
+$ git clone https://github.com/christian-cell/minikube-lamp-ended.git
 
 $ cd ejemplo-lamp-kubernetes
 
