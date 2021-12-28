@@ -19,7 +19,7 @@ services:
     environment:
       MYSQL_USER: christian
       MYSQL_ROOT_PASSWORD: secret
-      MSYQL_PASSWORD: secret
+      MYSQL_PASSWORD: secret
     volumes:
       - dump:/var/lib/mysql
   phpmyadmin:

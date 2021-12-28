@@ -7,16 +7,19 @@ metadata:
   namespace: lamp-dev
 spec:
   rules:
-  - host: "lamp-dev.com"
+  - host: "lamp-apache.com"
     http:
       paths:
-      - path: /server
+      - path: /
         pathType: Prefix
         backend:
           service:
             name: apachephp-service
             port:
               number: 80
+  - host: "lamp-phpmyadmin.com"
+    http:
+      paths:
       - path: /
         pathType: Prefix
         backend:
@@ -24,3 +27,10 @@ spec:
             name: phpmyadmin-service
             port:
               number: 80
+      #- path: /phpmyadmin
+        #pathType: Prefix
+        #backend:
+          #service:
+            #name: phpmyadmin-service
+            #port:
+              #number: 80

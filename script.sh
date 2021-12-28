@@ -29,5 +29,5 @@ then
 	kubectl apply -f ./kubernetes/mysql-depl.yaml
 	kubectl apply -f ./kubernetes/phpmyadmin-secret.yaml
 	kubectl apply -f ./kubernetes/phpmyadmin-depl.yaml
-    #kubectl apply -f ./kubernetes/ingress.yaml
+    kubectl apply -f ./kubernetes/ingress.yaml
 fi
