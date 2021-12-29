@@ -1,34 +1,46 @@
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mysql-pv
-  namespace: lamp-dev
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 5Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Delete
-  hostPath:
-    path: "/pvstorage/mysql/"
+#apiVersion: v1
+#kind: PersistentVolume
+#metadata:
+  #name: mysql-pv
+  #namespace: lamp-dev
+#spec:
+  #storageClassName: manual
+  #capacity:
+    #storage: 5Gi
+  #volumeMode: Filesystem
+  #accessModes:
+    #- ReadWriteOnce
+  #persistentVolumeReclaimPolicy: Delete
+  #hostPath:
+    #path: "/pvstorage/mysql/"
 
----
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+  #name: mysql-pvc
+  #namespace: lamp-dev
+  #labels:
+    #app: mysql
+#spec:
+  #storageClassName: manual
+  #accessModes:
+    #- ReadWriteOnce
+  #resources:
+    #requests:
+      #storage: 3Gi
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pvc
+  name: mysql-data-disk
   namespace: lamp-dev
-  labels:
-    app: mysql
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 3Gi
+      storage: 10Gi
 
 ---
 apiVersion: apps/v1
@@ -83,7 +95,7 @@ spec:
       volumes:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
-            claimName: mysql-pvc
+            claimName: mysql-data-disk
 
 ---
 apiVersion: v1
